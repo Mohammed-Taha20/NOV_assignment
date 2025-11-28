@@ -1,0 +1,45 @@
+{
+  "classify.predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "question": "Top products by revenue",
+        "reasoning": "The question asks to identify which products generated the most revenue. This requires analyzing sales data, likely involving a query or report that aggregates product revenues over a certain period of time (in this case possibly during Summer Beverages in 1997). The analysis would involve sorting and filtering by revenue figures to determine top-performing products.",
+        "classification": "sql"
+      },
+      {
+        "augmented": true,
+        "question": "How many orders in 1997?",
+        "reasoning": "The question asks to retrieve a specific numerical data point (the number of orders) from historical sales records during a particular year, which requires accessing or analyzing database information. This involves both understanding what kind of query is being asked and potentially executing an SQL-like command if the context implies working with structured databases.",
+        "classification": "sql"
+      }
+    ],
+    "signature": {
+      "instructions": "Classify the user question into one of: rag, sql, hybrid.\n\nDefinitions:\n- 'sql': Questions about data numbers, revenue, products, orders, employees, counts.\n- 'rag': Questions about text policies, return rules, company history, help.\n- 'hybrid': Complex questions needing both (e.g., \"policy for products with > $50 sales\").",
+      "fields": [
+        {
+          "prefix": "Question:",
+          "description": "${question}"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Classification:",
+          "description": "Output ONLY one word: rag, sql, or hybrid"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.0.4",
+      "cloudpickle": "3.1"
+    }
+  }
+}

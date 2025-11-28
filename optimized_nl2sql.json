@@ -1,0 +1,57 @@
+{
+  "generate.predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "question": "Products in Beverages category",
+        "db_schema": "\nCREATE TABLE [Categories] ([CategoryID] INTEGER PRIMARY KEY, [CategoryName] TEXT, [Description] TEXT);\nCREATE TABLE [Customers] ([CustomerID] TEXT PRIMARY KEY, [CompanyName] TEXT, [ContactName] TEXT, [City] TEXT, [Country] TEXT);\nCREATE TABLE [Employees] ([EmployeeID] INTEGER PRIMARY KEY, [LastName] TEXT, [FirstName] TEXT, [Title] TEXT, [HireDate] DATE);\nCREATE TABLE [Order Details] ([OrderID] INTEGER, [ProductID] INTEGER, [UnitPrice] NUMERIC, [Quantity] INTEGER, [Discount] REAL);\nCREATE TABLE [Orders] ([OrderID] INTEGER PRIMARY KEY, [CustomerID] TEXT, [EmployeeID] INTEGER, [OrderDate] DATETIME);\nCREATE TABLE [Products] ([ProductID] INTEGER PRIMARY KEY, [ProductName] TEXT, [CategoryID] INTEGER, [UnitPrice] NUMERIC, [UnitsInStock] INTEGER);\n",
+        "constraints": null,
+        "reasoning": "To retrieve products that belong to the 'Beverages' category, we need a query that joins the Products table with the Categories table on their CategoryID. The WHERE clause will filter out only those categories named 'Beverages'. Then, by selecting from these joined tables and grouping results by product name, we can list all products within this specific category.",
+        "sql": "SELECT p.ProductName FROM Products p JOIN Categories c ON p.CategoryID = c.CategoryID WHERE c.CategoryName = 'Beverages';"
+      },
+      {
+        "augmented": true,
+        "question": "Count of orders in 1997",
+        "db_schema": "\nCREATE TABLE [Categories] ([CategoryID] INTEGER PRIMARY KEY, [CategoryName] TEXT, [Description] TEXT);\nCREATE TABLE [Customers] ([CustomerID] TEXT PRIMARY KEY, [CompanyName] TEXT, [ContactName] TEXT, [City] TEXT, [Country] TEXT);\nCREATE TABLE [Employees] ([EmployeeID] INTEGER PRIMARY KEY, [LastName] TEXT, [FirstName] TEXT, [Title] TEXT, [HireDate] DATE);\nCREATE TABLE [Order Details] ([OrderID] INTEGER, [ProductID] INTEGER, [UnitPrice] NUMERIC, [Quantity] INTEGER, [Discount] REAL);\nCREATE TABLE [Orders] ([OrderID] INTEGER PRIMARY KEY, [CustomerID] TEXT, [EmployeeID] INTEGER, [OrderDate] DATETIME);\nCREATE TABLE [Products] ([ProductID] INTEGER PRIMARY KEY, [ProductName] TEXT, [CategoryID] INTEGER, [UnitPrice] NUMERIC, [UnitsInStock] INTEGER);\n",
+        "constraints": null,
+        "reasoning": "To count the number of orders placed in the year 1997, we need to extract records from the 'Orders' table where the 'OrderDate' falls within that specific year. The SQL query will use a WHERE clause to filter out dates and GROUP BY statement to aggregate them by order ID or any other relevant identifier if needed (though typically count is sufficient).",
+        "sql": "SELECT COUNT(*) as number_of_orders FROM Orders WHERE strftime('%Y', OrderDate) = '1997';"
+      }
+    ],
+    "signature": {
+      "instructions": "Generate a valid SQLite SELECT query from natural language.",
+      "fields": [
+        {
+          "prefix": "Question:",
+          "description": "${question}"
+        },
+        {
+          "prefix": "Db Schema:",
+          "description": "${db_schema}"
+        },
+        {
+          "prefix": "Constraints:",
+          "description": "${constraints}"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Sql:",
+          "description": "Valid SQLite SELECT query"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.0.4",
+      "cloudpickle": "3.1"
+    }
+  }
+}

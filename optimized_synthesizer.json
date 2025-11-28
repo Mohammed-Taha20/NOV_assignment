@@ -1,0 +1,63 @@
+{
+  "synthesize.predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "question": "Top products",
+        "sql_result": "\"No SQL data.\"",
+        "retrieved_chunks": "N\no\n \nd\no\nc\ns",
+        "format_hint": "natural",
+        "reasoning": "The provided SQL result indicates that there is no data available. The retrieved chunks suggest a lack of structured information, as indicated by individual letters 'N', 'o', 'd', 'c', 's'. Given the format hint suggests natural language processing and considering we are looking for top products which would typically require quantitative or qualitative product-related data to rank them, it is clear that there's no specific numerical answer available.",
+        "answer": "{\"answer\": null, \"source\": \"error\"}"
+      },
+      {
+        "augmented": true,
+        "question": "Order count",
+        "sql_result": "\"[{\\\"count\\\": 5}]\"",
+        "retrieved_chunks": "N\no\n \nd\no\nc\ns",
+        "format_hint": "int",
+        "reasoning": "The SQL result indicates that there is a JSON array containing one object with a \"count\" key. The retrieved chunks suggest missing data, as they contain no numerical value to extract from the provided string format hint (int). Since we have an actual numeric count in the sql_result but cannot parse it due to non-numeric characters or formatting issues in the `retrieved_chunks`, I am unable to provide a specific number.",
+        "answer": "{\"answer\": null, \"source\": \"error\"}"
+      }
+    ],
+    "signature": {
+      "instructions": "Synthesize the final answer as JSON.\n\nCRITICAL INSTRUCTIONS:\n1. If sql_result is \"No SQL data\" and retrieved_chunks has no answer, \n   return {\"answer\": \"I could not find data to answer this.\", \"source\": \"error\"}.\n2. Do NOT invent information.\n3. Output valid JSON only.",
+      "fields": [
+        {
+          "prefix": "Question:",
+          "description": "${question}"
+        },
+        {
+          "prefix": "Sql Result:",
+          "description": "${sql_result}"
+        },
+        {
+          "prefix": "Retrieved Chunks:",
+          "description": "${retrieved_chunks}"
+        },
+        {
+          "prefix": "Format Hint:",
+          "description": "${format_hint}"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Answer:",
+          "description": "JSON string with 'answer' and 'source' keys"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.0.4",
+      "cloudpickle": "3.1"
+    }
+  }
+}
