@@ -76,10 +76,7 @@ curl -L -o data/northwind.sqlite \
 mkdir -p docs
 # Add: marketing_calendar.md, kpi_definitions.md, catalog.md, product_policy.md
 
-# 6. Optimize modules (optional but recommended)
-python optimize_modules.py
-
-# 7. Run batch evaluation
+# 6. Run batch evaluation
 python run_agent_hybrid.py \
   --batch sample_questions_hybrid_eval.jsonl \
   --out outputs_hybrid.jsonl
@@ -118,7 +115,6 @@ Each answer in `outputs_hybrid.jsonl` includes:
 │   ├── catalog.md              # Product categories
 │   └── product_policy.md       # Return policies
 ├── run_agent_hybrid.py         # CLI entrypoint
-├── optimize_modules.py         # DSPy optimization script
 ├── sample_questions_hybrid_eval.jsonl
 └── requirements.txt
 ```
