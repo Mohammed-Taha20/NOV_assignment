@@ -1,21 +1,5 @@
 import dspy
-import json
 import re
-
-
-def extract_code_block(text: str) -> str:
-    """Extract code block from markdown or plain text"""
-    # Try markdown code block
-    match = re.search(r'```(?:sql)?\s*\n(.*?)\n```', text, re.DOTALL)
-    if match:
-        return match.group(1).strip()
-    
-    # Try SQL-like patterns
-    match = re.search(r'(SELECT.*?;)', text, re.DOTALL | re.IGNORECASE)
-    if match:
-        return match.group(1).strip()
-    
-    return text.strip()
 
 
 def extract_json_structure(text: str) -> str:

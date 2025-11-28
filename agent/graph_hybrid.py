@@ -6,11 +6,11 @@ from langgraph.checkpoint.memory import MemorySaver
 
 import dspy
 from agent.rag.retrieval import build_bm25, retrieve
-from agent.tools.sqlite_tool import run_sql, get_schema
+from agent.tools.sqlite_tool import run_sql
 from agent.tools.sql_templates import SQLTemplates
 from agent.dspy_signatures import (
     AnswerSynthesizer, ParameterExtractor,
-    extract_code_block, extract_json_structure
+    extract_json_structure
 )
 
 # Initialize LM
@@ -39,14 +39,6 @@ try:
 except Exception as e:
     print(f"⚠️ BM25 build failed: {e}")
 
-# Load schema
-print("📊 Loading schema...")
-try:
-    DB_SCHEMA = get_schema()
-    print(f"✓ Database schema loaded ({len(DB_SCHEMA)} chars)")
-except Exception as e:
-    print(f"✗ Schema load failed: {e}")
-    DB_SCHEMA = ""
 
 # Initialize modules
 print("🧠 Loading AI Modules...")

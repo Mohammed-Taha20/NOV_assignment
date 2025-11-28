@@ -29,14 +29,6 @@ def run_sql(query: str) -> List[Dict[str, Any]]:
         conn.close()
         
 
-def get_tables()-> List[str]:
-    conn = connect_db()
-    cur = conn.cursor()
-    cur.execute("SELECT name FROM sqlite_master WHERE type = 'table';")
-    tables = [row[0] for row in cur.fetchall() if row[0] != "sqlite_sequence"]
-    conn.close()
-    return tables
-
 def get_schema() -> str:
     """Returns the CREATE TABLE statements."""
     conn = connect_db()
